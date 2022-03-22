@@ -510,7 +510,7 @@
     <center><a href=https://scholar.google.com/citations?user=q9refl4AAAAJ&hl=zh-CN&authuser=1>Zhiwu Qing</a><sup>1</sup>, &nbsp <a href=https://scholar.google.com/citations?user=ZO3OQ-8AAAAJ&hl=zh-CN>Shiwei Zhang</a><sup>3,*</sup>, &nbsp <a href=https://huang-ziyuan.github.io>Ziyuan Huang</a><sup>2</sup>, &nbsp Yi Xu</a><sup>3</sup>, <a href=https://scholar.google.com/citations?user=cQbXvkcAAAAJ&hl=zh-CN&oi=sra>Xiang Wang</a><sup>1</sup></center>
 <center>Mingqian Tang<sup>2</sup>, &nbsp <a href=https://scholar.google.com/citations?user=4tku-lwAAAAJ&hl=zh-CN>Changxin Gao</a><sup>1,*</sup>, &nbsp <a href=https://scholar.google.com/citations?user=CS5uNscAAAAJ&hl=zh-CN&oi=ao>Rong Jin</a><sup>3</sup>, &nbsp <a href=https://scholar.google.com/citations?user=ky_ZowEAAAAJ&hl=zh-CN>Nong Sang</a><sup>1</sup></center>
 <br>
-<center><sup>1</sup> <a href=https://www.hust.edu.cn>Key Laboratory of Image Processing and Intelligent Control, School of Artificial Intelligence and Automation, Huazhong University of Science and Technology</a> </center> 
+<center><sup>1</sup> <a href=http://aia.hust.edu.cn>Key Laboratory of Image Processing and Intelligent Control, School of Artificial Intelligence and Automation, Huazhong University of Science and Technology</a> </center> 
 <center><sup>2</sup> <a href=https://arc.nus.edu.sg>ARC, National University of Singapore</a> &nbsp &nbsp <sup>3</sup> <a href=https://damo.alibaba.com/?lang=en>DAMO Academy, Alibaba Group</a></center> 
 <!-- <center>
 <b>Official pytorch implementation (for academia)</b>
@@ -548,88 +548,22 @@ Accepted to <b>CVPR 2022</b>
 
 
 
-<figure  id="figure-the-general-concept-of-our-tadaconv-compared-to-standard-spatial-convolutions-in-videos">
+<figure  id="figure-the-overall-framework-of-hico-hico-contains-three-parts-including-visual-consistency-learning-vcl-topical-consistency-learning-tcl-and-gradual-sampling-gs">
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img alt="The general concept of our TAdaConv compared to standard spatial convolutions in videos." srcset="
-               /media/spat-tadaconv_hubfd6ad04c9fb3b8ddc4c86ec752611d5_104751_0f8da8443523029e94e2a9e36a195c16.png 400w,
-               /media/spat-tadaconv_hubfd6ad04c9fb3b8ddc4c86ec752611d5_104751_ba719e3b47949605a5d9f9de3c8080d9.png 760w,
-               /media/spat-tadaconv_hubfd6ad04c9fb3b8ddc4c86ec752611d5_104751_1200x1200_fit_lanczos_3.png 1200w"
-               src="/media/spat-tadaconv_hubfd6ad04c9fb3b8ddc4c86ec752611d5_104751_0f8da8443523029e94e2a9e36a195c16.png"
-               width="50%"
-               height="328"
+    <div class="w-100" ><img alt="The overall framework of HiCo. HiCo contains three parts, including Visual Consistency Learning (VCL), Topical Consistency Learning (TCL), and Gradual Sampling (GS)." srcset="
+               /media/framework_hud463879c0d69f4eec9003c646ff775d0_538084_7b1663f28dd11086d0aee0f8650e8ee7.png 400w,
+               /media/framework_hud463879c0d69f4eec9003c646ff775d0_538084_402fef072c7ce888aed1409f54233d72.png 760w,
+               /media/framework_hud463879c0d69f4eec9003c646ff775d0_538084_1200x1200_fit_lanczos_3.png 1200w"
+               src="/media/framework_hud463879c0d69f4eec9003c646ff775d0_538084_7b1663f28dd11086d0aee0f8650e8ee7.png"
+               width="80%"
+               height="258"
                loading="lazy" data-zoomable /></div>
   </div><figcaption data-pre="Figure&nbsp;" data-post=":&nbsp;" class="numbered">
-      The general concept of our TAdaConv compared to standard spatial convolutions in videos.
+      The overall framework of HiCo. HiCo contains three parts, including Visual Consistency Learning (VCL), Topical Consistency Learning (TCL), and Gradual Sampling (GS).
     </figcaption></figure></center>
 <center><font face = "Times New Roman" size=5><b>Abstract</b></font></center>
-<div width="80%"><font face = "Times New Roman" size=3>Spatial convolutions are widely used in numerous deep video models. It fundamentally assumes spatio-temporal invariance, i.e., using shared weights for every location in different frames. This work presents <b>Temporally-Adaptive Convolutions (TAdaConv)</b> for video understanding, which shows that adaptive weight calibration along the temporal dimension is an efficient way to facilitate modelling complex temporal dynamics in videos. Specifically, TAdaConv empowers the spatial convolutions with temporal modelling abilities by calibrating the convolution weights for each frame according to its local and global temporal context. Compared to previous temporal modelling operations, TAdaConv is more efficient as it operates over the convolution kernels instead of the features, whose dimension is an order of magnitude smaller than the spatial resolutions. Further, the kernel calibration brings an increased model capacity. We construct TAda2D and TAdaConvNeXt networks by replacing the 2D convolutions in ResNet and ConvNeXt with TAdaConv, which leads to at least on par or better performance compared to state-of-the-art approaches on multiple video action recognition and localization benchmarks. We also demonstrate that as a readily plug-in operation with negligible computation overhead, TAdaConv can effectively improve many existing video models with a convincing margin.</font></div>
+<div width="80%"><font face = "Times New Roman" size=3>Natural videos provide rich visual contents for self- supervised learning. Yet most existing approaches for learning spatio-temporal representations rely on manually trimmed videos, leading to limited diversity in visual pat- terns and limited performance gain. In this work, we aim to learn representations by leveraging more abundant in- formation in untrimmed videos. To this end, we propose to learn a hierarchy of consistencies in videos, i.e., visual consistency and topical consistency, corresponding respec- tively to clip pairs that tend to be visually similar when separated by a short time span and share similar topics when separated by a long time span. Specifically, a hi- erarchical consistency learning framework HiCo is pre- sented, where the visually consistent pairs are encouraged to have the same representation through contrastive learn- ing, while the topically consistent pairs are coupled through a topical classifier that distinguishes whether they are topic- related. Further, we impose a gradual sampling algorithm for proposed hierarchical consistency learning, and demon- strate its theoretical superiority. Empirically, we show that not only HiCo can generate stronger representations on untrimmed videos, it also improves the representation qual- ity when applied to trimmed videos. This is in contrast to standard contrastive learning that fails to learn appropri- ate representations from untrimmed videos.</font></div>
 <br> 
-<center><font face = "Times New Roman" size=5><b>TAdaConv</b></font></center>
-<center>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<figure  id="figure-the-schematic-of-our-temporally-adaptive-convolutions-tadaconv">
-  <div class="d-flex justify-content-center">
-    <div class="w-100" ><img alt="The schematic of our temporally adaptive convolutions (TAdaConv)." srcset="
-               /media/tadaconv_hu546da9a18009f615aa6000f5c6d2a3de_219879_2371b091b86b5c6addb80af864d99bed.png 400w,
-               /media/tadaconv_hu546da9a18009f615aa6000f5c6d2a3de_219879_7e9a8e7487683797ac2e9f3a23b12db1.png 760w,
-               /media/tadaconv_hu546da9a18009f615aa6000f5c6d2a3de_219879_1200x1200_fit_lanczos_3.png 1200w"
-               src="/media/tadaconv_hu546da9a18009f615aa6000f5c6d2a3de_219879_2371b091b86b5c6addb80af864d99bed.png"
-               width="50%"
-               height="368"
-               loading="lazy" data-zoomable /></div>
-  </div><figcaption data-pre="Figure&nbsp;" data-post=":&nbsp;" class="numbered">
-      The schematic of our temporally adaptive convolutions (TAdaConv).
-    </figcaption></figure></center>
-<center><font face = "Times New Roman" size=5><b>Implementation</b></font></center>
-<pre><code class="language-python"># In https://github.com/alibaba/EssentialMC2/papers/ICLR2022-TAdaConv
-# 1. copy models/module_zoo/ops/tadaconv.py somewhere in your project 
-#    and import TAdaConv2d, RouteFuncMLP
-from tadaconv import TAdaConv2d, RouteFuncMLP
-
-class Model(nn.Module):
-  def __init__(self):
-
-    ...
-
-    # 2. define tadaconv and the route func in your model
-    self.conv_rf = RouteFuncMLP(
-                c_in=64,            # number of input filters
-                ratio=4,            # reduction ratio for MLP
-                kernels=[3,3],      # list of temporal kernel sizes
-    )
-    self.conv = TAdaConv2d(
-                in_channels     = 64,
-                out_channels    = 64,
-                kernel_size     = [1, 3, 3], # usually the temporal kernel size is fixed to be 1
-                stride          = [1, 1, 1], # usually the temporal stride is fixed to be 1
-                padding         = [0, 1, 1], # usually the temporal padding is fixed to be 0
-                bias            = False,
-                cal_dim         = &quot;cin&quot;
-            )
-
-     ...
-
-  def self.forward(x):
-
-    ...
-    
-    # 3. replace 'x = self.conv(x)' with the following line
-    x = self.conv(x, self.conv_rf(x))
-
-    ...
-</code></pre>
 <center><font face = "Times New Roman" size=5><b>Experiments</b></font></center>
 <center>
 
@@ -645,17 +579,19 @@ class Model(nn.Module):
 
 
 
-<figure  >
+<figure  id="figure-comparison-to-other-state-of-the-art-methods-on-the-action-recognition-task">
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img alt="" srcset="
-               /media/plugin-eval-ssv2k400_hu88f8d7e2d5dfc18346c5bc6646f44ad6_230786_bb15081f4d49f45a908701fad31803b7.png 400w,
-               /media/plugin-eval-ssv2k400_hu88f8d7e2d5dfc18346c5bc6646f44ad6_230786_0544e794a7675aa27aa28b574a4eb08a.png 760w,
-               /media/plugin-eval-ssv2k400_hu88f8d7e2d5dfc18346c5bc6646f44ad6_230786_1200x1200_fit_lanczos_3.png 1200w"
-               src="/media/plugin-eval-ssv2k400_hu88f8d7e2d5dfc18346c5bc6646f44ad6_230786_bb15081f4d49f45a908701fad31803b7.png"
-               width="50%"
-               height="296"
+    <div class="w-100" ><img alt="Comparison to other state-of-the-art methods on the action recognition task." srcset="
+               /media/hico-sota_hu80f35368a9d4ba99e55005a075c51473_993935_663ffda14d1f9a3fc71eafc1d39c0da8.png 400w,
+               /media/hico-sota_hu80f35368a9d4ba99e55005a075c51473_993935_c10e9cc1e42b9ea0c703eb3a6c166d6b.png 760w,
+               /media/hico-sota_hu80f35368a9d4ba99e55005a075c51473_993935_1200x1200_fit_lanczos_3.png 1200w"
+               src="/media/hico-sota_hu80f35368a9d4ba99e55005a075c51473_993935_663ffda14d1f9a3fc71eafc1d39c0da8.png"
+               width="75%"
+               height="586"
                loading="lazy" data-zoomable /></div>
-  </div></figure></center>
+  </div><figcaption data-pre="Figure&nbsp;" data-post=":&nbsp;" class="numbered">
+      Comparison to other state-of-the-art methods on the action recognition task.
+    </figcaption></figure></center>
 <center>
 
 
@@ -670,42 +606,19 @@ class Model(nn.Module):
 
 
 
-<figure  >
+<figure  id="figure-nearest-neighobor-retrieval-comparison-on-ucf101-and-hmdb51">
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img alt="" srcset="
-               /media/sota-ssv2-v2_hu049a0e3a9c65d05bf3b62ac1616c98b2_274468_5c924561a95875b550a3542d3867d91a.png 400w,
-               /media/sota-ssv2-v2_hu049a0e3a9c65d05bf3b62ac1616c98b2_274468_9f1cf64582b0df092921d254c67b565a.png 760w,
-               /media/sota-ssv2-v2_hu049a0e3a9c65d05bf3b62ac1616c98b2_274468_1200x1200_fit_lanczos_3.png 1200w"
-               src="/media/sota-ssv2-v2_hu049a0e3a9c65d05bf3b62ac1616c98b2_274468_5c924561a95875b550a3542d3867d91a.png"
-               width="50%"
-               height="403"
+    <div class="w-100" ><img alt="Nearest neighobor retrieval comparison on UCF101 and HMDB51." srcset="
+               /media/hico-retrieval_hu936daafa62621cf7bb4f7b1e11bf8844_356696_d7e0c9551c98d4f1f5bec79fc4a6b66f.png 400w,
+               /media/hico-retrieval_hu936daafa62621cf7bb4f7b1e11bf8844_356696_27623bbb3e9b79aa8970877cdf17bf1b.png 760w,
+               /media/hico-retrieval_hu936daafa62621cf7bb4f7b1e11bf8844_356696_1200x1200_fit_lanczos_3.png 1200w"
+               src="/media/hico-retrieval_hu936daafa62621cf7bb4f7b1e11bf8844_356696_d7e0c9551c98d4f1f5bec79fc4a6b66f.png"
+               width="75%"
+               height="219"
                loading="lazy" data-zoomable /></div>
-  </div></figure></center>
-<center>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<figure  >
-  <div class="d-flex justify-content-center">
-    <div class="w-100" ><img alt="" srcset="
-               /media/sota-k400-v2_hu83f6a3c2c7dc49d1a476f7f6fcf07961_248209_5bcb30f594a3dd21c1d7757a28d9d44e.png 400w,
-               /media/sota-k400-v2_hu83f6a3c2c7dc49d1a476f7f6fcf07961_248209_ea9595807aee0d09c8d7dc7c37335da0.png 760w,
-               /media/sota-k400-v2_hu83f6a3c2c7dc49d1a476f7f6fcf07961_248209_1200x1200_fit_lanczos_3.png 1200w"
-               src="/media/sota-k400-v2_hu83f6a3c2c7dc49d1a476f7f6fcf07961_248209_5bcb30f594a3dd21c1d7757a28d9d44e.png"
-               width="50%"
-               height="441"
-               loading="lazy" data-zoomable /></div>
-  </div></figure></center>
+  </div><figcaption data-pre="Figure&nbsp;" data-post=":&nbsp;" class="numbered">
+      Nearest neighobor retrieval comparison on UCF101 and HMDB51.
+    </figcaption></figure></center>
 <!-- <center><font face = "Times New Roman" size=5><b>Citation</b></font></center>
 
 ```BibTeX
@@ -719,8 +632,8 @@ class Model(nn.Module):
 
 <center><font face = "Times New Roman" size=5><b>Contact</b></font></center>
 
-<center>If you have any question, please contact Ziyuan Huang at <a href=mailto:ziyuan.huang@u.nus.edu><b>ziyuan.huang@u.nus.edu</b></a>.</center> -->
-<center> <font size=2>Last updated: Jan 2022</font> </center>
+<center>If you have any question, please contact Zhiwu Qing at <a href=mailto:qzw@hust.edu.cn><b>qzw@hust.edu.cn</b></a>.</center> -->
+<center> <font size=2>Last updated: March 2022</font> </center>
   </div>
 
 
@@ -979,7 +892,7 @@ We also demonstrate that as a readily plug-in operation with negligible computat
 </code></pre>
 <center><h2>Contact</h2></center>
 <!-- <center><font size=5>Contact</font></center> -->
-<center>If you have any question, please contact Ziyuan Huang at <a href=mailto:ziyuan.huang@u.nus.edu><b>ziyuan.huang@u.nus.edu</b></a>.</center>
+<center>If you have any question, please contact Zhiwu Qing at <a href=mailto:qzw@hust.edu.cn><b>qzw@hust.edu.cn</b></a>.</center> -->
 <!-- <center> <font size=2>Last updated: Jan 2022</font> </center> -->
   </div>
 
